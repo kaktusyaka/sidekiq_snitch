@@ -13,7 +13,7 @@ module Sidekiq
         Net::HTTP.get(URI(ENV['SIDEKIQ_SNITCH_URL']))
 
         # groundhog day!
-        Snitch.perform_in(1.hour)
+        Snitch.perform_in(15.minutes)
       end
     end
   end
