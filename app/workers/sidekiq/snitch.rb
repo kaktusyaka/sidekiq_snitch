@@ -12,6 +12,7 @@ module Sidekiq
       if ENV['SIDEKIQ_SNITCH_URL'].present?
         Net::HTTP.get(URI(ENV['SIDEKIQ_SNITCH_URL']))
 
+        #https://github.com/imme5150/sidekiq_snitch/commit/560b19422464f62676a966e2f503bbe22d08f6bd
         already_scheduled = Sidekiq::ScheduledSet.new.any? {|job| job.klass == "Sidekiq::Snitch" }
         # groundhog day!
         Snitch.perform_in(10.minutes) unless already_scheduled
